@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useToasts } from 'react-toast-notifications';
 import { ResourceFormSchema } from '../utils/schema';
+import { saveResource } from '../api/resources';
 
 export default function Main() {
   const { addToast } = useToasts();
@@ -13,8 +14,9 @@ export default function Main() {
         description: '',
       }}
       validationSchema={ResourceFormSchema}
-      onSubmit={(values, { resetForm }) => {
+      onSubmit={async (values, { resetForm }) => {
         console.log(values);
+        await saveResource(values);
         addToast('Saved Successfully', {
           appearance: 'success',
           autoDismiss: true,
@@ -64,7 +66,7 @@ export default function Main() {
                         type="text"
                         name="description"
                         id="description"
-                        className="border p-2.5 border-gray-300 text-lg focus:ring-purple-500 focus:border-purple-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm"
+                        className="border p-2.5 border-gray-300 text-lg focus:ring-purple-500 focus:border-purple-500 flex-1 block w-full rounded-none rounded-md sm:text-sm"
                         placeholder="What's it about?"
                       />
                       <ErrorMessage
