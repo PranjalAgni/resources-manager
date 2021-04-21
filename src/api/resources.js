@@ -1,4 +1,4 @@
-export const BASE_API_URL = 'https://api.resmanager.pranjal.me/api';
+export const BASE_API_URL = 'https://resource-manager-server.herokuapp.com/api';
 
 export const saveResource = async (payload) => {
   const API_URL = `${BASE_API_URL}/resources/create`;
